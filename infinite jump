@@ -1,0 +1,14 @@
+local UserInputService = game:GetService("UserInputService")
+local player = game.Players.LocalPlayer
+local humanoid = player.Character and player.Character:FindFirstChildOfClass("Humanoid")
+
+UserInputService.JumpRequest:Connect(function()
+    if humanoid then
+        humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+    end
+end)
+
+-- Optional: Keep updating the humanoid if character respawns
+player.CharacterAdded:Connect(function(char)
+    humanoid = char:WaitForChild("Humanoid")
+end)
